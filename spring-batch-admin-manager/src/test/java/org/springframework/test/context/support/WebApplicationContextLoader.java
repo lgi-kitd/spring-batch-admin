@@ -24,6 +24,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigUtils;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.mock.web.MockServletContext;
+import org.springframework.test.context.MergedContextConfiguration;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.GenericWebApplicationContext;
@@ -36,7 +37,7 @@ public class WebApplicationContextLoader extends AbstractContextLoader {
 	 * <p>
 	 * Creates a new {@link XmlBeanDefinitionReader}.
 	 * </p>
-	 * 
+	 *
 	 * @return a new XmlBeanDefinitionReader.
 	 * @see AbstractGenericContextLoader#createBeanDefinitionReader(GenericApplicationContext)
 	 * @see XmlBeanDefinitionReader
@@ -47,7 +48,7 @@ public class WebApplicationContextLoader extends AbstractContextLoader {
 
 	/**
 	 * Returns &quot;<code>-context.xml</code>&quot;.
-	 * 
+	 *
 	 * @see org.springframework.test.context.support.AbstractContextLoader#getResourceSuffix()
 	 */
 	@Override
@@ -83,4 +84,7 @@ public class WebApplicationContextLoader extends AbstractContextLoader {
 		servletContext.setAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE, context);
 	}
 
+    public ApplicationContext loadContext(MergedContextConfiguration mergedConfig) throws Exception {
+        return this.loadContext(mergedConfig.getLocations());
+    }
 }
