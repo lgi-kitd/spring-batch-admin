@@ -1,11 +1,12 @@
 <#import "/spring.ftl" as spring />
 <#if jobExecutionInfo??>
 <#assign url><@spring.url relativeUrl="${servletPath}/jobs/executions/${jobExecutionInfo.id?c}.json"/></#assign>
-"jobExecution" : { 
+"jobExecution" : {
     "resource" : "${baseUrl}${url}",
     "id" : "${jobExecutionInfo.id?c}",
     "name" : "${jobExecutionInfo.name}",
     "status" : "${jobExecutionInfo.jobExecution.status}",
+    "startDate" : "${jobExecutionInfo.startDate}",
     "startTime" : "${jobExecutionInfo.startTime}",
     "duration" : "${jobExecutionInfo.duration}",
     "exitCode" : "${jobExecutionInfo.jobExecution.exitStatus.exitCode}",
@@ -31,7 +32,7 @@
     }
 <#else>
     "stepExecutions" : {<#list jobExecutionInfo.jobExecution.stepExecutions as stepExecution><#assign steps_url><@spring.url relativeUrl="${servletPath}/jobs/executions/${jobExecutionInfo.id?c}/steps/${stepExecution.id?c}.json"/></#assign>
-        "${stepExecution.stepName}" : { 
+        "${stepExecution.stepName}" : {
         	"resource" : "${baseUrl}${steps_url}",
         	"status" : "${stepExecution.status}",
  			"exitCode" : "${stepExecution.exitStatus.exitCode}"
